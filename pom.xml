@@ -20,13 +20,20 @@
       <version>2.5</version>
       <scope>provided</scope>
     </dependency>
-    
-    <dependency>
+        <!-- jsp stuff-->
+        <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        <!-- spring stuff-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -42,11 +49,8 @@
             <artifactId>spring-orm</artifactId>
             <version>3.0.5.RELEASE</version>
         </dependency>
-<!--        <dependency>
-            <groupId>org.scribe</groupId>
-            <artifactId>scribe</artifactId>
-            <version>1.0.6</version>
-        </dependency>-->
+
+        <!-- new family search-related stuff-->
         <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
@@ -65,12 +69,12 @@
           <version>2.0.0</version>
           <type>jar</type>
       </dependency>
-      <dependency>
+<!--      <dependency>
           <groupId>org.familysearch.new.reference</groupId>
           <artifactId>authorities</artifactId>
           <version>2.0.0</version>
           <type>jar</type>
-      </dependency>
+      </dependency>-->
 <!--      <dependency>
           <groupId>org.familysearch.new.reference</groupId>
           <artifactId>identity</artifactId>

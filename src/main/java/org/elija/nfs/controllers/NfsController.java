@@ -6,6 +6,7 @@ package org.elija.nfs.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.HashMap;
 import org.springframework.validation.BindException;
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +73,7 @@ public class NfsController extends MultiActionController {
         URI authUrl = nfsAuthenticator.getAuthenticationUrl();
         HashMap<String, Object> model = new HashMap<String, Object>();
         model.put("authUrl", authUrl);
-        ModelAndView modelAndView = new ModelAndView("nfs/index", model);
+        ModelAndView modelAndView = new ModelAndView("nfs/authenticate", model);
         return modelAndView;
     }
 
@@ -92,10 +93,17 @@ public class NfsController extends MultiActionController {
         Person me=tree.getPersons().get(0);
         String id=me.getId();
         
-        FamilyTree family=this.nfsClient.getPedigree(id,3); 
+
+        FamilyTree familytree=this.nfsClient.getPedigree(id,3); 
+        Collection<Person> persons=familytree.getPedigrees().get(0).getPersons();
+        //familytree.getPersons().
         FamilyTree properties=this.nfsClient.getProperties();
+        
+        //amilytree.getPersons().get(0).
         HashMap<String, Object> model = new HashMap<String, Object>();
         model.put("me",me);
+        model.put("persons",persons);
+        model.put("properties",properties.getProperties());
         ModelAndView modelAndView = new ModelAndView("nfs/test", model);
         return modelAndView;
     }
