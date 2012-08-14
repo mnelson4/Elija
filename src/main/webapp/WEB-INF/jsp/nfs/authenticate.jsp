@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World! This is in NFS folder! </h1>
+        <h1>You are required to authenticate with New Family Search</h1>
         <a href="${authUrl}">Click here to authentication with New Family Search</a>
         
     </body>

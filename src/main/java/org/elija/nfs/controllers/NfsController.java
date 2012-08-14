@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import org.elija.nfs.services.NFSAPIClient;
 import org.elija.nfs.services.NFSOAuthenticator;
+import org.elija.nfs.services.exceptions.NFSNoSessionException;
 import org.familysearch.ws.client.familytree.v2.schema.FamilyTree;
 import org.familysearch.ws.client.familytree.v2.schema.Person;
 import org.springframework.web.servlet.ModelAndView;
@@ -89,23 +90,25 @@ public class NfsController extends MultiActionController {
     }
     
     public ModelAndView test(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        FamilyTree tree=this.nfsClient.getMe();
-        Person me=tree.getPersons().get(0);
-        String id=me.getId();
-        
+        try{
+            FamilyTree tree=this.nfsClient.getMe();
+            Person me=tree.getPersons().get(0);
+            String id=me.getId();
 
-        FamilyTree familytree=this.nfsClient.getPedigree(id,3); 
-        Collection<Person> persons=familytree.getPedigrees().get(0).getPersons();
-        //familytree.getPersons().
-        FamilyTree properties=this.nfsClient.getProperties();
-        
-        //amilytree.getPersons().get(0).
-        HashMap<String, Object> model = new HashMap<String, Object>();
-        model.put("me",me);
-        model.put("persons",persons);
-        model.put("properties",properties.getProperties());
-        ModelAndView modelAndView = new ModelAndView("nfs/test", model);
-        return modelAndView;
+
+            FamilyTree familytree=this.nfsClient.getPedigree(id,3); 
+            Collection<Person> persons=familytree.getPedigrees().get(0).getPersons();
+            //familytree.getPersons().
+            FamilyTree properties=this.nfsClient.getProperties();
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            model.put("me",me);
+            model.put("persons",persons);
+            model.put("properties",properties.getProperties());
+            ModelAndView modelAndView = new ModelAndView("nfs/test", model);
+            return modelAndView;
+        }catch(NFSNoSessionException e){
+            return authenticate(hsr,hsr1);
+        }
     }
     
     

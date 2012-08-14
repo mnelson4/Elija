@@ -24,6 +24,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.elija.nfs.services.exceptions.NFSAPIException;
+import org.elija.nfs.services.exceptions.NFSNoSessionException;
 import org.elija.nfs.services.exceptions.NFSOAuthException;
 import org.familysearch.ws.client.familytree.v2.schema.FamilyTree;
 
@@ -51,7 +52,9 @@ public class NFSAPIClient {
             this.server = "api.familysearch.org/";
         }
     }
-    public FamilyTree getPedigree(String pid, Integer generations) throws NFSAPIException{
+    public FamilyTree getPedigree(String pid, Integer generations) throws NFSAPIException, NFSNoSessionException{
+        if(this.sessionId==null)
+            throw new NFSNoSessionException();
         URIBuilder builder = new URIBuilder();
         builder.setScheme("https")
                 .setHost(this.server)
@@ -66,7 +69,9 @@ public class NFSAPIClient {
             return ft;
         }catch(Exception e){throw new NFSAPIException("Exception while grabbing me."+e);}
     }
-    public FamilyTree getMe() throws NFSAPIException{
+    public FamilyTree getMe() throws NFSAPIException, NFSNoSessionException{
+        if(this.sessionId==null)
+            throw new NFSNoSessionException();
         URIBuilder builder = new URIBuilder();
         builder.setScheme("https")
                 .setHost(this.server)
@@ -81,8 +86,9 @@ public class NFSAPIClient {
         }catch(Exception e){throw new NFSAPIException("Exception while grabbing me."+e);}
     }
     
-    public FamilyTree getProperties() throws NFSAPIException{
-        //https://api.familysearch.org/familytree/v2/properties
+    public FamilyTree getProperties() throws NFSAPIException, NFSNoSessionException{
+        if(this.sessionId==null)
+            throw new NFSNoSessionException();
         URIBuilder builder = new URIBuilder();
         builder.setScheme("https")
                 .setHost(this.server)
@@ -93,6 +99,5 @@ public class NFSAPIClient {
             FamilyTree ft=(FamilyTree)this.xmlUnmarshaller.unmarshal(uri.toURL());
             return ft;
         }catch(Exception e){throw new NFSAPIException("Exception while grabbing me."+e);}
-    }
-    
+    }    
 }
