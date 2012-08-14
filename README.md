@@ -7,7 +7,7 @@ It's built in the NetBeans IDE with Maven.
 It uses some Spring MVC Framework stuff for controllers and setup, and the JAXB New Family Search API.\r\n
 
 To Build:<br>
-1. Install NetBeans IDE with Glassfish (I suppose you could use Eclipse IDE and/or Tomcat, or some other Web Container, but I haven't tested them)\r\n
+1. Install NetBeans IDE with Glassfish (I suppose you could use Eclipse IDE and/or Tomcat, or some other Web Container, but I haven't tested them<br>
 2. Install Maven. \r\n
 3. Checkout this code from github, remember it's location.\r\n
 4. Open this project in NetBeans\r\n
