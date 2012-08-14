@@ -1,12 +1,12 @@
 Elija
 =====
 This is a small JEE application which uses the New Family Search  API.
-It walks the user through the OAuth steps, and then makes a few simple requests from New Family Search.\r\n
+It walks the user through the OAuth steps, and then makes a few simple requests from New Family Search.
 
 It's built in the NetBeans IDE with Maven. 
 It uses some Spring MVC Framework stuff for controllers and setup, and the JAXB New Family Search API.\r\n
 
-To Build:\r\n
+To Build:<br>
 1. Install NetBeans IDE with Glassfish (I suppose you could use Eclipse IDE and/or Tomcat, or some other Web Container, but I haven't tested them)\r\n
 2. Install Maven. \r\n
 3. Checkout this code from github, remember it's location.\r\n
