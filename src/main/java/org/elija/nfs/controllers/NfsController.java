@@ -65,10 +65,6 @@ public class NfsController extends MultiActionController {
     }
 
     public ModelAndView authenticate(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        //String nfsDeveloperKey = "FAKE-7J1Q-GKEV-7DNM-SQ5M-9Q5H-JX3H-CMJK";//getServletContext().getInitParameter("NFSdeveloperKey");
-      
-        //NFSOAuthenticator nfsAuth = new NFSOAuthenticator(nfsDeveloperKey, true);
-        //this.nfsAuthenticator=nfsAuth;
         this.nfsAuthenticator.getRequestToken("http://localhost:8080/GenealogyGuide/nfs/authenticate_callback.htm");
 
         URI authUrl = nfsAuthenticator.getAuthenticationUrl();
@@ -98,6 +94,7 @@ public class NfsController extends MultiActionController {
 
             FamilyTree familytree=this.nfsClient.getPedigree(id,3); 
             Collection<Person> persons=familytree.getPedigrees().get(0).getPersons();
+            //familytree.getPersons().get(0).getAssertions().getNames().get(0).
             //familytree.getPersons().
             FamilyTree properties=this.nfsClient.getProperties();
             HashMap<String, Object> model = new HashMap<String, Object>();

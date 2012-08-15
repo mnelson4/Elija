@@ -22,3 +22,6 @@ mvn install:install-file
   -DgeneratePom=true <br>
 6. in src/main/webapp/WEB-INF/web.xml, change the context parameter "NFSdeveloperKey" to be the developer key you received from Family Search<br>
 7. You should now be able to build it in NetBeans, and run it. Direct your browser to http://localhost/GenealogyGuide/nfs/authenticate.htm to get started!
+
+Note: if anyone has any suggestions on how to simplify this basic New Family Search client webapp or hwo to use more industry-standard methodologies, please let me know at:<br>
+Mike Nelson, thespacecamel [at] hotmail.com

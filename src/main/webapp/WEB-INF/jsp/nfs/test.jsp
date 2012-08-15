@@ -20,7 +20,14 @@
         Persons we found in your tree:
         <ol>
         <c:forEach var="person" items="${persons}" >
-            <li>Person:${person} ${person.id}</li>
+            <li>Person ID: ${person.id}
+                <c:forEach items="${person.assertions.names}" var="name">
+                    <c:forEach items="${name.value.forms}" var="form">
+                        ${form.fullText}
+                    </c:forEach>
+                </c:forEach>
+                
+            </li>
         </c:forEach>    
         </ol>
         
