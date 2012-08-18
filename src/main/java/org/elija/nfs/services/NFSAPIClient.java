@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.UnmarshalException;
 import javax.xml.bind.Unmarshaller;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -65,9 +66,24 @@ public class NFSAPIClient {
         
         try{
             URI uri=builder.build();
+            
+//             HttpGet httpget = new HttpGet(uri);
+//        String uriString = httpget.getURI().toString();
+//        HttpResponse response;
+//        DefaultHttpClient httpclient = new DefaultHttpClient();
+//        HttpContext localContext = new BasicHttpContext();
+//            response = httpclient.execute(httpget, localContext);
+//            HttpEntity entity = response.getEntity();
+//          String output = EntityUtils.toString(entity);
+            
             FamilyTree ft=(FamilyTree)this.xmlUnmarshaller.unmarshal(uri.toURL());
             return ft;
-        }catch(Exception e){throw new NFSAPIException("Exception while grabbing me."+e);}
+        }catch(UnmarshalException e){
+            throw new NFSAPIException("We seem to have received an incorrect response from New Family Search: "+e);
+        }
+        catch(Exception e){
+            throw new NFSAPIException("Exception while grabbing me."+e);
+        }
     }
     public FamilyTree getMe() throws NFSAPIException, NFSNoSessionException{
         if(this.sessionId==null)

@@ -38,7 +38,7 @@ import org.elija.nfs.services.exceptions.NFSOAuthException;
       
         NFSOAuthenticator nfsAuth = new NFSOAuthenticator(nfsDeveloperKey, true);
         this.nfsAuthenticator=nfsAuth;
-        this.nfsAuthenticator.getRequestToken("http://localhost:8080/GenealogyGuide/nfs/authenticate_callback.htm");
+        this.nfsAuthenticator.getRequestToken("http://localhost:8080/Elija/nfs/authenticate_callback.htm");
 
         URI authUrl = nfsAuthenticator.getAuthenticationUrl();
         HashMap<String, Object> model = new HashMap<String, Object>();

@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import org.elija.nfs.services.NFSAPIClient;
 import org.elija.nfs.services.NFSOAuthenticator;
+import org.elija.nfs.services.exceptions.NFSAPIException;
 import org.elija.nfs.services.exceptions.NFSNoSessionException;
 import org.familysearch.ws.client.familytree.v2.schema.FamilyTree;
 import org.familysearch.ws.client.familytree.v2.schema.Person;
@@ -52,20 +53,10 @@ public class NfsController extends MultiActionController {
         ModelAndView model = new ModelAndView("nfs/index");
         return model;
     }
-    
-    public ModelAndView getPedigree(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception{
-        
-       
-       
-       
-        HashMap<String, Object> model = new HashMap<String, Object>();
-        //model.put("me",me);
-        ModelAndView modelAndView = new ModelAndView("nfs/test", model);
-        return modelAndView;
-    }
+
 
     public ModelAndView authenticate(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
-        this.nfsAuthenticator.getRequestToken("http://localhost:8080/GenealogyGuide/nfs/authenticate_callback.htm");
+        this.nfsAuthenticator.getRequestToken("http://localhost:8080/Elija/nfs/authenticate_callback.htm");
 
         URI authUrl = nfsAuthenticator.getAuthenticationUrl();
         HashMap<String, Object> model = new HashMap<String, Object>();
@@ -91,12 +82,12 @@ public class NfsController extends MultiActionController {
             Person me=tree.getPersons().get(0);
             String id=me.getId();
 
-
+            FamilyTree properties=this.nfsClient.getProperties();
             FamilyTree familytree=this.nfsClient.getPedigree(id,3); 
             Collection<Person> persons=familytree.getPedigrees().get(0).getPersons();
             //familytree.getPersons().get(0).getAssertions().getNames().get(0).
             //familytree.getPersons().
-            FamilyTree properties=this.nfsClient.getProperties();
+            
             HashMap<String, Object> model = new HashMap<String, Object>();
             model.put("me",me);
             model.put("persons",persons);
@@ -105,6 +96,11 @@ public class NfsController extends MultiActionController {
             return modelAndView;
         }catch(NFSNoSessionException e){
             return authenticate(hsr,hsr1);
+        }catch(NFSAPIException e){
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            model.put("exception",e);
+            ModelAndView modelAndView = new ModelAndView("nfs/exception", model);
+            return modelAndView;
         }
     }
     

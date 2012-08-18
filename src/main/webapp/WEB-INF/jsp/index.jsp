@@ -5,11 +5,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Genealogy Guide</title>
+        <title>Elija Demo</title>
     </head>
 
     <body>
-        <p>Hello! This is the "Genealogy Guide"!</p>
+        <p>Hello! This is the "Elija Demo"! A small sample JEE application for showing how to make requests to New Family Search.</p>
         <p><a href='nfs/authenticate.htm'>Click here</a> to start the OAuth process with New Family Search, then we'll use the API.</p>
                 
     </body>
